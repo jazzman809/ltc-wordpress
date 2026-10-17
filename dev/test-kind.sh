@@ -39,9 +39,9 @@ echo "$html" | grep -q "Bonoloto" && pass "Bonoloto shortcode rendered" || bad "
 echo "$html" | grep -q "ltc-unavailable" && bad "visitor sees the unavailable hint" || pass "unknown game is invisible to visitors"
 
 echo "== 2. cached: a second load makes no API call"
-before=$($K logs deploy/ltc-api --since=10m 2>/dev/null | grep -c "/public/embed/")
+before=$($K logs deploy/ltc-api --since=10m 2>/dev/null | grep -c "GET /public/embed/")
 curl -s "$WP/?page_id=$page_id" >/dev/null
-after=$($K logs deploy/ltc-api --since=10m 2>/dev/null | grep -c "/public/embed/")
+after=$($K logs deploy/ltc-api --since=10m 2>/dev/null | grep -c "GET /public/embed/")
 [ "$before" = "$after" ] && pass "no new embed requests ($after total)" || bad "cache miss: $before -> $after requests"
 
 echo "== 3. Spanish"
@@ -68,12 +68,19 @@ st=$($WPCLI eval 'delete_option("lotalytics_last_error"); $r = Lotalytics\Result
 [ "$st" = "good" ] && pass "Site Health good again" || bad "Site Health status '$st'"
 
 echo "== 5. the API records where the widget is used"
-POD=$($K get pod -l app=ltc-api -o jsonpath='{.items[0].metadata.name}')
+# The API never counts localhost (its own hosts), so give the site a real-looking
+# name for one load: home_url() is what the plugin reports as the page.
+$WPCLI option update home http://fan-site.test:8089 >/dev/null 2>&1
+$WPCLI option update siteurl http://fan-site.test:8089 >/dev/null 2>&1
+$WPCLI eval 'Lotalytics\Results\Api_Client::clear_cache();' >/dev/null 2>&1
+curl -s --resolve fan-site.test:8089:127.0.0.1 "http://fan-site.test:8089/?page_id=$page_id" >/dev/null
+$WPCLI option update home http://localhost:8089 >/dev/null 2>&1
+$WPCLI option update siteurl http://localhost:8089 >/dev/null 2>&1
+POD=$($K get pod -l app=ltc-api --field-selector=status.phase=Running --sort-by=.metadata.creationTimestamp -o jsonpath='{.items[-1:].metadata.name}')
 seen=$($K exec -i "$POD" -- sh -c 'cd /app && python -' 2>/dev/null <<'EOF' | tail -1
 import sys
 sys.path.insert(0, "/app")
-from models.game_data.game_source import GameSource  # noqa
-from models.game.drawing import Drawing  # noqa
+import main  # noqa: F401 — every model registered
 from config.db.database import SessionLocal
 from service.embeds import embed_service
 from models.embeds.embed_site import EmbedSite
@@ -82,6 +89,6 @@ embed_service.fold(db)
 print(sorted((s.domain, sorted(s.games)) for s in db.query(EmbedSite).all()))
 EOF
 )
-echo "$seen" | grep -q "localhost" && pass "embed_sites: $seen" || bad "no embed_sites row: $seen"
+echo "$seen" | grep -q "fan-site.test" && pass "embed_sites: $seen" || bad "no embed_sites row: $seen"
 
 [ $fail = 0 ] && echo "ALL PASSED" || { echo "FAILURES"; exit 1; }

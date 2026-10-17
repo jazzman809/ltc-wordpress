@@ -151,6 +151,12 @@ class Api_Client {
 		if ( is_array( $fresh ) ) {
 			return $fresh;
 		}
+		// A recent failure with nothing to fall back on (an unknown game, an
+		// outage on a new install): don't ask again on every page view.
+		$mkey = self::PREFIX . 'miss_' . md5( $key );
+		if ( get_transient( $mkey ) ) {
+			return null;
+		}
 		$data = self::fetch( $url );
 		if ( is_array( $data ) ) {
 			set_transient( $tkey, $data, max( MINUTE_IN_SECONDS, (int) call_user_func( $ttl_fn, $data ) ) );
@@ -162,8 +168,11 @@ class Api_Client {
 		$stale = get_option( self::PREFIX . 'stale_' . md5( $key ) );
 		if ( is_array( $stale ) ) {
 			set_transient( $tkey, $stale, 5 * MINUTE_IN_SECONDS );
+			self::remember( $tkey );
 			return $stale;
 		}
+		set_transient( $mkey, 1, 5 * MINUTE_IN_SECONDS );
+		self::remember( $mkey );
 		return null;
 	}
 
@@ -219,7 +228,9 @@ class Api_Client {
 		$transients = (array) get_option( self::PREFIX . 'cache_keys', array() );
 		$options    = array();
 		foreach ( $transients as $tkey ) {
-			$options[] = str_replace( self::PREFIX, self::PREFIX . 'stale_', $tkey );
+			if ( 0 !== strpos( $tkey, self::PREFIX . 'miss_' ) ) {
+				$options[] = str_replace( self::PREFIX, self::PREFIX . 'stale_', $tkey );
+			}
 		}
 		return array(
 			'transients' => $transients,
