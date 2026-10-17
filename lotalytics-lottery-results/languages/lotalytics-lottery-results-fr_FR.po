@@ -1,0 +1,179 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Lotalytics – Lottery Results 0.1.0\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: lotalytics-lottery-results\n"
+
+msgid "Lotalytics – Lottery Results"
+msgstr "Lotalytics – Résultats de loterie"
+
+msgid "Show the latest lottery results and the next draw date for 50+ lotteries, as blocks, a shortcode or a widget. Results come from the Lotalytics API."
+msgstr "Affichez les derniers résultats et la date du prochain tirage de plus de 50 loteries, en blocs, shortcode ou widget. Les résultats proviennent de l’API Lotalytics."
+
+msgid "The Lotalytics API answered HTTP %d."
+msgstr "L’API Lotalytics a répondu HTTP %d."
+
+msgid "Settings"
+msgstr "Réglages"
+
+msgid "Game"
+msgstr "Jeu"
+
+msgid "Number of draws"
+msgstr "Nombre de tirages"
+
+msgid "Compact (hide the next draw date)"
+msgstr "Compact (masque la date du prochain tirage)"
+
+msgid "Show the title"
+msgstr "Afficher le titre"
+
+msgid "The game list could not be loaded. Type a game slug, for example \"powerball\"."
+msgstr "La liste des jeux n’a pas pu être chargée. Saisissez le slug d’un jeu, par exemple \"powerball\"."
+
+msgid "Game slug"
+msgstr "Slug du jeu"
+
+msgid "%s results by Lotalytics"
+msgstr "Résultats %s par Lotalytics"
+
+msgid "Lottery results are unavailable right now. Check the game in the block settings, or try again in a few minutes."
+msgstr "Les résultats sont indisponibles pour le moment. Vérifiez le jeu dans les réglages du bloc ou réessayez dans quelques minutes."
+
+msgid "Lotalytics Lottery Results"
+msgstr "Résultats de loterie Lotalytics"
+
+msgid "Credit link"
+msgstr "Lien de crédit"
+
+msgid "Default game"
+msgstr "Jeu par défaut"
+
+msgid "Styling"
+msgstr "Style"
+
+msgid "Show \"Results by Lotalytics\" under the results"
+msgstr "Afficher \"Résultats par Lotalytics\" sous les résultats"
+
+msgid "Off unless you turn it on. The free Lotalytics service asks sites that use it to show this credit; see the terms linked below."
+msgstr "Désactivé tant que vous ne l’activez pas. Le service gratuit Lotalytics demande aux sites qui l’utilisent d’afficher ce crédit ; voir les conditions ci-dessous."
+
+msgid "The game list could not be loaded. Enter a game slug, for example \"powerball\"."
+msgstr "La liste des jeux n’a pas pu être chargée. Saisissez le slug d’un jeu, par exemple \"powerball\"."
+
+msgid "Disable the plugin stylesheet"
+msgstr "Désactiver la feuille de style de l’extension"
+
+msgid "For themes that style the results themselves. The markup uses ltc- class names."
+msgstr "Pour les thèmes qui stylisent eux-mêmes les résultats. Le balisage utilise des classes ltc-."
+
+msgid "Cache cleared."
+msgstr "Cache vidé."
+
+msgid "Add the \"Lottery results\" or \"Next lottery draw\" block to any page, or use a shortcode:"
+msgstr "Ajoutez le bloc \"Résultats de loterie\" ou \"Prochain tirage\" à n’importe quelle page, ou utilisez un shortcode :"
+
+msgid "Clear cached results"
+msgstr "Vider les résultats en cache"
+
+msgid "About the data"
+msgstr "À propos des données"
+
+msgid "This plugin is a front end for the Lotalytics service. Your server requests results from api.lotalytics.com and caches them; your visitors' browsers never contact Lotalytics. Each request sends the game, the number of draws, the page language and your site's address. Nothing about your visitors is sent."
+msgstr "Cette extension est une interface du service Lotalytics. Votre serveur demande les résultats à api.lotalytics.com et les met en cache ; les navigateurs de vos visiteurs ne contactent jamais Lotalytics. Chaque requête envoie le jeu, le nombre de tirages, la langue de la page et l’adresse de votre site. Rien sur vos visiteurs n’est envoyé."
+
+msgid "Terms of service"
+msgstr "Conditions d’utilisation"
+
+msgid "Privacy policy"
+msgstr "Politique de confidentialité"
+
+msgid "You are not allowed to do that."
+msgstr "Vous n’avez pas l’autorisation de faire cela."
+
+msgid "Lotalytics API"
+msgstr "API Lotalytics"
+
+msgid "Lottery results can be loaded from Lotalytics"
+msgstr "Les résultats de loterie peuvent être chargés depuis Lotalytics"
+
+msgid "Lottery results could not be loaded from Lotalytics"
+msgstr "Les résultats de loterie n’ont pas pu être chargés depuis Lotalytics"
+
+msgid "The plugin reached api.lotalytics.com. Results are cached, and the last good copy is shown if the service is briefly unavailable."
+msgstr "L’extension a joint api.lotalytics.com. Les résultats sont mis en cache, et la dernière copie valide est affichée si le service est brièvement indisponible."
+
+msgid "The game list came back empty."
+msgstr "La liste des jeux est revenue vide."
+
+msgid "Lottery results (Lotalytics)"
+msgstr "Résultats de loterie (Lotalytics)"
+
+msgid "The latest winning numbers of a lottery."
+msgstr "Les derniers numéros gagnants d’une loterie."
+
+msgid "Title (optional)"
+msgstr "Titre (facultatif)"
+
+msgid "Bonus"
+msgstr "Bonus"
+
+msgid "%s results"
+msgstr "Résultats %s"
+
+msgid "Winning numbers"
+msgstr "Numéros gagnants"
+
+msgid "Next draw: %s"
+msgstr "Prochain tirage : %s"
+
+msgid "Next %s draw"
+msgstr "Prochain tirage %s"
+
+msgctxt "block title"
+msgid "Lottery results"
+msgstr "Résultats de loterie"
+
+msgctxt "block description"
+msgid "The latest winning numbers of a lottery, with the next draw date."
+msgstr "Les derniers numéros gagnants d’une loterie, avec la date du prochain tirage."
+
+msgctxt "block keyword"
+msgid "lottery"
+msgstr "loterie"
+
+msgctxt "block keyword"
+msgid "lotto"
+msgstr "loto"
+
+msgctxt "block keyword"
+msgid "results"
+msgstr "résultats"
+
+msgctxt "block keyword"
+msgid "winning numbers"
+msgstr "numéros gagnants"
+
+msgctxt "block keyword"
+msgid "powerball"
+msgstr "powerball"
+
+msgctxt "block title"
+msgid "Next lottery draw"
+msgstr "Prochain tirage de loterie"
+
+msgctxt "block description"
+msgid "The date of a lottery's next scheduled draw."
+msgstr "La date du prochain tirage prévu d’une loterie."
+
+msgctxt "block keyword"
+msgid "next draw"
+msgstr "prochain tirage"
+
+msgctxt "block keyword"
+msgid "jackpot"
+msgstr "jackpot"

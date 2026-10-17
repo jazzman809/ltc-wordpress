@@ -1,0 +1,38 @@
+# Local WordPress for developing and testing the plugin. Not shipped.
+#   docker compose -f dev/docker-compose.yml up -d
+#   docker compose -f dev/docker-compose.yml run --rm cli wp core install ...
+services:
+  db:
+    image: mariadb:11
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: wp
+      MARIADB_USER: wp
+      MARIADB_PASSWORD: wp
+  wordpress:
+    image: wordpress:latest
+    depends_on: [db]
+    ports: ["8089:80"]
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wp
+      WORDPRESS_DB_PASSWORD: wp
+      WORDPRESS_DB_NAME: wp
+      WORDPRESS_DEBUG: "1"
+    volumes:
+      - wp:/var/www/html
+      - ../lotalytics-lottery-results:/var/www/html/wp-content/plugins/lotalytics-lottery-results
+  cli:
+    image: wordpress:cli
+    depends_on: [db, wordpress]
+    user: "33:33"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wp
+      WORDPRESS_DB_PASSWORD: wp
+      WORDPRESS_DB_NAME: wp
+    volumes:
+      - wp:/var/www/html
+      - ../lotalytics-lottery-results:/var/www/html/wp-content/plugins/lotalytics-lottery-results
+volumes:
+  wp:

@@ -1,0 +1,274 @@
+# Copyright (C) 2026 Lotalytics
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Lotalytics – Lottery Results 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/lotalytics-lottery-results\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-10-17T01:51:29+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: lotalytics-lottery-results\n"
+
+#. Plugin Name of the plugin
+#: lotalytics-lottery-results.php
+msgid "Lotalytics – Lottery Results"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: lotalytics-lottery-results.php
+msgid "https://lotalytics.com/widgets"
+msgstr ""
+
+#. Description of the plugin
+#: lotalytics-lottery-results.php
+msgid "Show the latest lottery results and the next draw date for 50+ lotteries, as blocks, a shortcode or a widget. Results come from the Lotalytics API."
+msgstr ""
+
+#. Author of the plugin
+#: lotalytics-lottery-results.php
+#: includes/class-settings.php:93
+#: includes/class-site-health.php:48
+msgid "Lotalytics"
+msgstr ""
+
+#. Author URI of the plugin
+#: lotalytics-lottery-results.php
+msgid "https://lotalytics.com"
+msgstr ""
+
+#. translators: %d: HTTP status code.
+#: includes/class-api-client.php:174
+#, php-format
+msgid "The Lotalytics API answered HTTP %d."
+msgstr ""
+
+#: includes/class-blocks.php:56
+#: includes/class-settings.php:109
+msgid "Settings"
+msgstr ""
+
+#: includes/class-blocks.php:57
+#: includes/class-widget.php:89
+msgid "Game"
+msgstr ""
+
+#: includes/class-blocks.php:58
+#: includes/class-widget.php:101
+msgid "Number of draws"
+msgstr ""
+
+#: includes/class-blocks.php:59
+#: includes/class-widget.php:106
+msgid "Compact (hide the next draw date)"
+msgstr ""
+
+#: includes/class-blocks.php:60
+msgid "Show the title"
+msgstr ""
+
+#: includes/class-blocks.php:61
+msgid "The game list could not be loaded. Type a game slug, for example \"powerball\"."
+msgstr ""
+
+#: includes/class-blocks.php:62
+msgid "Game slug"
+msgstr ""
+
+#. translators: %s: lottery game name, e.g. "Powerball".
+#: includes/class-renderer.php:146
+#, php-format
+msgid "%s results by Lotalytics"
+msgstr ""
+
+#: includes/class-renderer.php:166
+msgid "Lottery results are unavailable right now. Check the game in the block settings, or try again in a few minutes."
+msgstr ""
+
+#: includes/class-settings.php:92
+#: includes/class-settings.php:207
+msgid "Lotalytics Lottery Results"
+msgstr ""
+
+#: includes/class-settings.php:128
+msgid "Credit link"
+msgstr ""
+
+#: includes/class-settings.php:129
+msgid "Default game"
+msgstr ""
+
+#: includes/class-settings.php:130
+msgid "Styling"
+msgstr ""
+
+#: includes/class-settings.php:157
+msgid "Show \"Results by Lotalytics\" under the results"
+msgstr ""
+
+#: includes/class-settings.php:158
+msgid "Off unless you turn it on. The free Lotalytics service asks sites that use it to show this credit; see the terms linked below."
+msgstr ""
+
+#: includes/class-settings.php:173
+msgid "The game list could not be loaded. Enter a game slug, for example \"powerball\"."
+msgstr ""
+
+#: includes/class-settings.php:193
+msgid "Disable the plugin stylesheet"
+msgstr ""
+
+#: includes/class-settings.php:194
+msgid "For themes that style the results themselves. The markup uses ltc- class names."
+msgstr ""
+
+#: includes/class-settings.php:211
+msgid "Cache cleared."
+msgstr ""
+
+#: includes/class-settings.php:214
+msgid "Add the \"Lottery results\" or \"Next lottery draw\" block to any page, or use a shortcode:"
+msgstr ""
+
+#: includes/class-settings.php:226
+msgid "Clear cached results"
+msgstr ""
+
+#: includes/class-settings.php:228
+msgid "About the data"
+msgstr ""
+
+#: includes/class-settings.php:230
+msgid "This plugin is a front end for the Lotalytics service. Your server requests results from api.lotalytics.com and caches them; your visitors' browsers never contact Lotalytics. Each request sends the game, the number of draws, the page language and your site's address. Nothing about your visitors is sent."
+msgstr ""
+
+#: includes/class-settings.php:233
+msgid "Terms of service"
+msgstr ""
+
+#: includes/class-settings.php:235
+msgid "Privacy policy"
+msgstr ""
+
+#: includes/class-settings.php:246
+msgid "You are not allowed to do that."
+msgstr ""
+
+#: includes/class-site-health.php:27
+msgid "Lotalytics API"
+msgstr ""
+
+#: includes/class-site-health.php:44
+msgid "Lottery results can be loaded from Lotalytics"
+msgstr ""
+
+#: includes/class-site-health.php:45
+msgid "Lottery results could not be loaded from Lotalytics"
+msgstr ""
+
+#: includes/class-site-health.php:53
+msgid "The plugin reached api.lotalytics.com. Results are cached, and the last good copy is shown if the service is briefly unavailable."
+msgstr ""
+
+#: includes/class-site-health.php:54
+msgid "The game list came back empty."
+msgstr ""
+
+#: includes/class-widget.php:32
+msgid "Lottery results (Lotalytics)"
+msgstr ""
+
+#: includes/class-widget.php:34
+msgid "The latest winning numbers of a lottery."
+msgstr ""
+
+#: includes/class-widget.php:85
+msgid "Title (optional)"
+msgstr ""
+
+#: templates/latest-results.php:21
+msgid "Bonus"
+msgstr ""
+
+#. translators: %s: lottery game name, e.g. "Powerball".
+#: templates/latest-results.php:28
+#, php-format
+msgid "%s results"
+msgstr ""
+
+#: templates/latest-results.php:36
+msgid "Winning numbers"
+msgstr ""
+
+#. translators: %s: date of the next draw.
+#: templates/latest-results.php:59
+#, php-format
+msgid "Next draw: %s"
+msgstr ""
+
+#. translators: %s: lottery game name, e.g. "Powerball".
+#: templates/next-draw.php:24
+#, php-format
+msgid "Next %s draw"
+msgstr ""
+
+#: blocks/latest-results/block.json
+msgctxt "block title"
+msgid "Lottery results"
+msgstr ""
+
+#: blocks/latest-results/block.json
+msgctxt "block description"
+msgid "The latest winning numbers of a lottery, with the next draw date."
+msgstr ""
+
+#: blocks/latest-results/block.json
+#: blocks/next-draw/block.json
+msgctxt "block keyword"
+msgid "lottery"
+msgstr ""
+
+#: blocks/latest-results/block.json
+#: blocks/next-draw/block.json
+msgctxt "block keyword"
+msgid "lotto"
+msgstr ""
+
+#: blocks/latest-results/block.json
+msgctxt "block keyword"
+msgid "results"
+msgstr ""
+
+#: blocks/latest-results/block.json
+msgctxt "block keyword"
+msgid "winning numbers"
+msgstr ""
+
+#: blocks/latest-results/block.json
+msgctxt "block keyword"
+msgid "powerball"
+msgstr ""
+
+#: blocks/next-draw/block.json
+msgctxt "block title"
+msgid "Next lottery draw"
+msgstr ""
+
+#: blocks/next-draw/block.json
+msgctxt "block description"
+msgid "The date of a lottery's next scheduled draw."
+msgstr ""
+
+#: blocks/next-draw/block.json
+msgctxt "block keyword"
+msgid "next draw"
+msgstr ""
+
+#: blocks/next-draw/block.json
+msgctxt "block keyword"
+msgid "jackpot"
+msgstr ""

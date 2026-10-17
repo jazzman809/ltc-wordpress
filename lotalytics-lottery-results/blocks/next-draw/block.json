@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "lotalytics/next-draw",
+	"version": "0.1.0",
+	"title": "Next lottery draw",
+	"category": "widgets",
+	"icon": "calendar-alt",
+	"description": "The date of a lottery's next scheduled draw.",
+	"keywords": [ "lottery", "lotto", "next draw", "jackpot" ],
+	"textdomain": "lotalytics-lottery-results",
+	"attributes": {
+		"game": { "type": "string", "default": "" }
+	},
+	"supports": {
+		"html": false,
+		"color": { "text": true, "background": true, "link": true },
+		"typography": { "fontSize": true },
+		"spacing": { "margin": true, "padding": true }
+	},
+	"editorScript": "lotalytics-results-editor",
+	"style": "lotalytics-results"
+}

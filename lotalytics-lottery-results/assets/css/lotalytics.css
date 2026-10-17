@@ -1,0 +1,90 @@
+/*
+ * Lotalytics – Lottery Results. Low specificity on purpose (:where()), and
+ * every colour and size is a custom property, so themes win without !important.
+ * Override any of these in your theme, e.g. .ltc-results { --ltc-ball-bg: #fde68a; }
+ */
+:where(.ltc-results, .ltc-next-draw) {
+	--ltc-ball-size: 2.1em;
+	--ltc-ball-bg: color-mix(in srgb, currentColor 9%, transparent);
+	--ltc-ball-color: inherit;
+	--ltc-bonus-bg: #f5c542;
+	--ltc-bonus-color: #3b2a00;
+	--ltc-muted: color-mix(in srgb, currentColor 65%, transparent);
+	--ltc-gap: 0.35em;
+	box-sizing: border-box;
+}
+
+:where(.ltc-results__title, .ltc-next-draw__label) {
+	font-weight: 600;
+	margin: 0 0 0.5em;
+}
+
+:where(.ltc-draws) {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+:where(.ltc-draw) {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--ltc-gap) 0.75em;
+	padding: 0.45em 0;
+	margin: 0;
+}
+
+:where(.ltc-draw + .ltc-draw) {
+	border-top: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+}
+
+:where(.ltc-draw__date) {
+	color: var(--ltc-muted);
+	font-size: 0.85em;
+	min-width: 8.5em;
+}
+
+:where(.ltc-balls) {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--ltc-gap);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+:where(.ltc-ball) {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--ltc-ball-size);
+	height: var(--ltc-ball-size);
+	border-radius: 50%;
+	background: var(--ltc-ball-bg);
+	color: var(--ltc-ball-color);
+	font-weight: 600;
+	font-variant-numeric: tabular-nums;
+	margin: 0;
+}
+
+:where(.ltc-ball--bonus) {
+	background: var(--ltc-bonus-bg);
+	color: var(--ltc-bonus-color);
+}
+
+:where(.ltc-results--compact .ltc-draw__date) {
+	min-width: 0;
+}
+
+:where(.ltc-next, .ltc-next-draw__date, .ltc-credit, .ltc-unavailable) {
+	margin: 0.6em 0 0;
+}
+
+:where(.ltc-next, .ltc-credit) {
+	color: var(--ltc-muted);
+	font-size: 0.85em;
+}
+
+:where(.ltc-next-draw__date) {
+	font-size: 1.15em;
+}
