@@ -38,7 +38,7 @@ The plugin never adds a link to your site unless you ask it to. Under **Settings
 
 = For developers =
 
-Filters: `lotalytics_results_data` (the payload before rendering), `lotalytics_ball_html` (one ball), `lotalytics_credit_html`, `lotalytics_cache_ttl` (seconds). Every CSS colour and size is a custom property (`--ltc-ball-bg`, `--ltc-bonus-bg`, `--ltc-ball-size`…).
+Filters: `lotalytics_results_data` (the payload before rendering), `lotalytics_ball_html` (one ball), `lotalytics_credit_html`, `lotalytics_cache_ttl` (seconds), `lotalytics_api_base` (point the plugin at a staging API; or define `LOTALYTICS_API_BASE` in wp-config.php). Every CSS colour and size is a custom property (`--ltc-ball-bg`, `--ltc-bonus-bg`, `--ltc-ball-size`…).
 
 == Installation ==
 

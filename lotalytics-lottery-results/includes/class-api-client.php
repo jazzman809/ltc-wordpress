@@ -27,6 +27,24 @@ class Api_Client {
 	const MAX_DRAW = 5;
 
 	/**
+	 * The API's base URL. Production unless overridden for testing, either with
+	 * `define( 'LOTALYTICS_API_BASE', 'http://localhost:18080' );` in wp-config.php
+	 * or the `lotalytics_api_base` filter.
+	 *
+	 * @return string No trailing slash.
+	 */
+	public static function base() {
+		$base = defined( 'LOTALYTICS_API_BASE' ) ? (string) LOTALYTICS_API_BASE : self::BASE;
+		/**
+		 * Filters the Lotalytics API base URL (for staging and local testing).
+		 *
+		 * @param string $base The base URL, no trailing slash.
+		 */
+		$base = (string) apply_filters( 'lotalytics_api_base', $base );
+		return untrailingslashit( esc_url_raw( $base ) );
+	}
+
+	/**
 	 * The data language for the current request: the site or user locale, or English.
 	 *
 	 * @return string Two-letter code Lotalytics serves.
@@ -56,9 +74,9 @@ class Api_Client {
 				'locale' => $locale,
 				'page'   => home_url( '/' ),
 			),
-			self::BASE . '/public/embed/' . rawurlencode( $slug )
+			self::base() . '/public/embed/' . rawurlencode( $slug )
 		);
-		return self::cached( 'r_' . $slug . '_' . $draws . '_' . $locale, $url, array( __CLASS__, 'results_ttl' ) );
+		return self::cached( self::base() . '|r_' . $slug . '_' . $draws . '_' . $locale, $url, array( __CLASS__, 'results_ttl' ) );
 	}
 
 	/**
@@ -68,8 +86,8 @@ class Api_Client {
 	 */
 	public static function games() {
 		$data = self::cached(
-			'games',
-			self::BASE . '/public/games',
+			self::base() . '|games',
+			self::base() . '/public/games',
 			static function () {
 				return DAY_IN_SECONDS;
 			}

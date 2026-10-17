@@ -1,0 +1,12 @@
+# Point the dev WordPress at the API running in the local kind cluster
+# (ltc repo: dev/kind/up.sh, host port 18080):
+#   docker compose -f dev/docker-compose.yml -f dev/docker-compose.kind.yml -p ltcwp up -d
+services:
+  wordpress:
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    environment:
+      WORDPRESS_CONFIG_EXTRA: "define( 'LOTALYTICS_API_BASE', 'http://host.docker.internal:18080' );"
+  cli:
+    extra_hosts: ["host.docker.internal:host-gateway"]
+    environment:
+      WORDPRESS_CONFIG_EXTRA: "define( 'LOTALYTICS_API_BASE', 'http://host.docker.internal:18080' );"
