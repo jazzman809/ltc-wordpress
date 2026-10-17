@@ -3,7 +3,7 @@
  * every colour and size is a custom property, so themes win without !important.
  * Override any of these in your theme, e.g. .ltc-results { --ltc-ball-bg: #fde68a; }
  */
-:where(.ltc-results, .ltc-next-draw) {
+:where(.ltc-results, .ltc-next-draw, .ltc-section-index) {
 	--ltc-ball-size: 2.1em;
 	--ltc-ball-bg: color-mix(in srgb, currentColor 9%, transparent);
 	--ltc-ball-color: inherit;
@@ -87,4 +87,33 @@
 
 :where(.ltc-next-draw__date) {
 	font-size: 1.15em;
+}
+
+:where(.ltc-pager) {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5em 1em;
+	margin: 1em 0 0;
+	font-size: 0.9em;
+}
+
+:where(.ltc-pager__count) {
+	color: var(--ltc-muted);
+}
+
+:where(.ltc-draw-page .ltc-draw) {
+	padding: 0.5em 0 1em;
+	--ltc-ball-size: 2.6em;
+	font-size: 1.1em;
+}
+
+:where(.ltc-games) {
+	columns: 14em auto;
+	padding-left: 1.1em;
+}
+
+:where(.ltc-draw__date a) {
+	color: inherit;
 }

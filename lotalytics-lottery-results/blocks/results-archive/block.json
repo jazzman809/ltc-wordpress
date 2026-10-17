@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "lotalytics/results-archive",
+	"version": "0.2.0",
+	"title": "Lottery results archive",
+	"category": "widgets",
+	"icon": "list-view",
+	"description": "A lottery's past draws, page by page. Needs a Lotalytics API key whose plan includes the archive.",
+	"keywords": [ "lottery", "results", "archive", "history" ],
+	"textdomain": "lotalytics-lottery-results",
+	"attributes": {
+		"game": { "type": "string", "default": "" },
+		"perPage": { "type": "integer", "default": 20 }
+	},
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ],
+		"color": { "text": true, "background": true, "link": true },
+		"typography": { "fontSize": true },
+		"spacing": { "margin": true, "padding": true }
+	},
+	"editorScript": "lotalytics-results-editor",
+	"style": "lotalytics-results"
+}

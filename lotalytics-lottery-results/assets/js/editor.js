@@ -120,4 +120,35 @@
 			return null;
 		},
 	} );
+	wp.blocks.registerBlockType( 'lotalytics/results-archive', {
+		edit: function ( props ) {
+			var a = props.attributes;
+			return el(
+				Fragment,
+				null,
+				el(
+					InspectorControls,
+					null,
+					el(
+						PanelBody,
+						{ title: s.settings, initialOpen: true },
+						gameControl( a, props.setAttributes ),
+						el( RangeControl, {
+							label: s.perPage,
+							min: 5,
+							max: 100,
+							value: a.perPage,
+							onChange: function ( v ) {
+								props.setAttributes( { perPage: v } );
+							},
+						} )
+					)
+				),
+				preview( 'lotalytics/results-archive', a, useBlockProps() )
+			);
+		},
+		save: function () {
+			return null;
+		},
+	} );
 } )( window.wp );

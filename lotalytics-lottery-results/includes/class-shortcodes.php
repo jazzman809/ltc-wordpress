@@ -25,6 +25,7 @@ class Shortcodes {
 	public static function register() {
 		add_shortcode( 'lotalytics_results', array( __CLASS__, 'results' ) );
 		add_shortcode( 'lotalytics_next_draw', array( __CLASS__, 'next_draw' ) );
+		add_shortcode( 'lotalytics_archive', array( __CLASS__, 'archive' ) );
 	}
 
 	/**
@@ -46,6 +47,25 @@ class Shortcodes {
 			'lotalytics_results'
 		);
 		return Renderer::latest_results( $atts );
+	}
+
+	/**
+	 * [lotalytics_archive game="powerball" per_page="20"]: needs a key whose plan includes it.
+	 *
+	 * @param array|string $atts Attributes.
+	 * @return string
+	 */
+	public static function archive( $atts ) {
+		$atts = shortcode_atts(
+			array(
+				'game'     => Settings::default_game(),
+				'per_page' => Settings::per_page(),
+				'class'    => '',
+			),
+			$atts,
+			'lotalytics_archive'
+		);
+		return Renderer::archive_block( $atts );
 	}
 
 	/**

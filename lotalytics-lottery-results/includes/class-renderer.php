@@ -20,12 +20,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 class Renderer {
 
 	const STYLE = 'lotalytics-results';
+	// The same file under a handle that isn't a block style: block themes load
+	// block styles only where the block renders, so shortcodes, widgets and the
+	// results section use this one.
+	const STYLE_STANDALONE = 'lotalytics-results-standalone';
 
 	/**
 	 * Register the stylesheet; it's enqueued only where something renders.
 	 */
 	public static function register_assets() {
-		wp_register_style( self::STYLE, LOTALYTICS_RESULTS_URL . 'assets/css/lotalytics.css', array(), LOTALYTICS_RESULTS_VERSION );
+		// "Disable the plugin stylesheet" has to reach the blocks too: their style
+		// comes from block.json, which WordPress loads by itself, so the handle is
+		// registered without a file instead.
+		$src = Settings::css_disabled() ? false : LOTALYTICS_RESULTS_URL . 'assets/css/lotalytics.css';
+		wp_register_style( self::STYLE, $src, array(), LOTALYTICS_RESULTS_VERSION );
+		wp_register_style( self::STYLE_STANDALONE, $src, array(), LOTALYTICS_RESULTS_VERSION );
+	}
+
+	/**
+	 * Queue the stylesheet (once, whichever handle is already there).
+	 */
+	public static function enqueue_style() {
+		// Only "done" counts: a block theme marks every block style enqueued up
+		// front and drops the ones whose block didn't render when it prints.
+		if ( Settings::css_disabled() || wp_style_is( self::STYLE, 'done' ) ) {
+			return;
+		}
+		wp_enqueue_style( self::STYLE_STANDALONE );
 	}
 
 	/**
@@ -91,6 +112,112 @@ class Renderer {
 			return self::unavailable();
 		}
 		return self::template( 'next-draw.php', compact( 'data', 'args', 'wrapper' ) );
+	}
+
+	/**
+	 * The archive block / shortcode: a game's history, paginated with ?ltc_page=N.
+	 * Needs a key whose plan includes the archive.
+	 *
+	 * @param array  $args    game, per_page, class.
+	 * @param string $wrapper Block wrapper attributes.
+	 * @return string HTML.
+	 */
+	public static function archive_block( $args, $wrapper = '' ) {
+		$args = wp_parse_args(
+			(array) $args,
+			array(
+				'game'     => Settings::default_game(),
+				'per_page' => Settings::per_page(),
+				'class'    => '',
+			)
+		);
+		if ( ! Api_Client::has_key() || ! Api_Client::features()['archive'] ) {
+			return self::editor_hint( __( 'The results archive needs a Lotalytics API key whose plan includes it (Settings → Lotalytics).', 'lotalytics-lottery-results' ) );
+		}
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- a read-only page number.
+		$page = isset( $_GET['ltc_page'] ) ? max( 1, absint( wp_unslash( $_GET['ltc_page'] ) ) ) : 1;
+		$data = Api_Client::drawings( $args['game'], $page, max( 5, min( 100, (int) $args['per_page'] ) ) );
+		if ( empty( $data['drawings'] ) ) {
+			return 403 === Api_Client::$last_status
+				? self::editor_hint( __( 'Your Lotalytics plan doesn\'t include this game. Pick one of your plan\'s games in the block settings.', 'lotalytics-lottery-results' ) )
+				: self::unavailable();
+		}
+		return self::archive( $data, $page, false, $wrapper, $args['class'] );
+	}
+
+	/**
+	 * A page of a game's history.
+	 *
+	 * @param array  $data       /v1 drawings payload.
+	 * @param int    $page       Page number.
+	 * @param bool   $in_section On the results section (path pagination) or a post (?ltc_page=).
+	 * @param string $wrapper    Block wrapper attributes.
+	 * @param string $class      Extra classes.
+	 * @return string HTML.
+	 */
+	public static function archive( $data, $page, $in_section, $wrapper = '', $class = '' ) {
+		$data  = apply_filters( 'lotalytics_results_data', $data, array( 'game' => $data['game'], 'archive' => true ) );
+		$pages = max( 1, (int) ceil( (int) $data['total'] / max( 1, (int) $data['page_size'] ) ) );
+		$link  = static function ( $n ) use ( $data, $in_section ) {
+			return $in_section ? Results_Section::url( $data['game'], null, $n ) : add_query_arg( 'ltc_page', $n );
+		};
+		$nav   = array(
+			'prev' => $page > 1 ? $link( $page - 1 ) : '',
+			'next' => $page < $pages ? $link( $page + 1 ) : '',
+			'page' => $page,
+			'of'   => $pages,
+		);
+		return self::template( 'archive.php', array(
+			'data'    => $data,
+			'args'    => array(
+				'class'      => $class,
+				'in_section' => $in_section,
+				'draw_links' => Results_Section::enabled(),
+			),
+			'wrapper' => $wrapper,
+			'nav'     => $nav,
+		) );
+	}
+
+	/**
+	 * One draw (the results section's draw page).
+	 *
+	 * @param array $data /v1 single-draw payload.
+	 * @return string HTML.
+	 */
+	public static function draw_page( $data ) {
+		return self::template( 'draw.php', array(
+			'data'    => $data,
+			'args'    => array( 'class' => '' ),
+			'wrapper' => '',
+		) );
+	}
+
+	/**
+	 * The section's front page: the games.
+	 *
+	 * @param array $games List of ['slug', 'name'].
+	 * @return string HTML.
+	 */
+	public static function section_index( $games ) {
+		return self::template( 'section-index.php', array(
+			'data'    => array( 'games' => $games ),
+			'args'    => array( 'class' => '' ),
+			'wrapper' => '',
+		) );
+	}
+
+	/**
+	 * A note for editors only (visitors see nothing).
+	 *
+	 * @param string $text Message.
+	 * @return string HTML.
+	 */
+	private static function editor_hint( $text ) {
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			return '';
+		}
+		return '<p class="ltc-unavailable">' . esc_html( $text ) . '</p>';
 	}
 
 	/**
@@ -174,9 +301,7 @@ class Renderer {
 	 * @return string HTML.
 	 */
 	private static function template( $file, $vars ) {
-		if ( ! Settings::css_disabled() ) {
-			wp_enqueue_style( self::STYLE );
-		}
+		self::enqueue_style();
 		$path = locate_template( array( 'lotalytics/' . $file ) );
 		if ( ! $path ) {
 			$path = LOTALYTICS_RESULTS_DIR . 'templates/' . $file;
@@ -184,6 +309,7 @@ class Renderer {
 		$data    = $vars['data'];
 		$args    = $vars['args'];
 		$wrapper = $vars['wrapper'];
+		$nav     = isset( $vars['nav'] ) ? $vars['nav'] : array();
 		ob_start();
 		include $path;
 		return (string) ob_get_clean();

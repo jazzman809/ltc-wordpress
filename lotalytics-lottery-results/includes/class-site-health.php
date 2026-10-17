@@ -27,7 +27,46 @@ class Site_Health {
 			'label' => __( 'Lotalytics API', 'lotalytics-lottery-results' ),
 			'test'  => array( __CLASS__, 'test' ),
 		);
+		if ( Api_Client::has_key() ) {
+			$tests['direct']['lotalytics_key'] = array(
+				'label' => __( 'Lotalytics API key', 'lotalytics-lottery-results' ),
+				'test'  => array( __CLASS__, 'test_key' ),
+			);
+		}
 		return $tests;
+	}
+
+	/**
+	 * The key: accepted, and not near its quota.
+	 *
+	 * @return array
+	 */
+	public static function test_key() {
+		$a = Api_Client::account( true );
+		if ( ! is_array( $a ) ) {
+			$status = 'critical';
+			$label  = __( 'The Lotalytics API key was not accepted', 'lotalytics-lottery-results' );
+			$desc   = __( 'Check the key under Settings → Lotalytics. Until it works, the archive and the draw pages are off; the free results blocks keep working.', 'lotalytics-lottery-results' );
+		} elseif ( Api_Client::quota_low() ) {
+			$status = 'recommended';
+			$label  = __( 'The Lotalytics API key is close to its request limit', 'lotalytics-lottery-results' );
+			$desc   = __( 'Results are cached for longer until the limit resets. A bigger plan raises the limit.', 'lotalytics-lottery-results' );
+		} else {
+			$status = 'good';
+			$label  = __( 'The Lotalytics API key works', 'lotalytics-lottery-results' );
+			/* translators: %s: plan name. */
+			$desc = sprintf( __( 'Plan: %s.', 'lotalytics-lottery-results' ), ! empty( $a['plan']['name'] ) ? $a['plan']['name'] : '—' );
+		}
+		return array(
+			'label'       => $label,
+			'status'      => $status,
+			'badge'       => array(
+				'label' => __( 'Lotalytics', 'lotalytics-lottery-results' ),
+				'color' => 'good' === $status ? 'blue' : 'orange',
+			),
+			'description' => '<p>' . esc_html( $desc ) . '</p>',
+			'test'        => 'lotalytics_key',
+		);
 	}
 
 	/**

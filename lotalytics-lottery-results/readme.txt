@@ -4,11 +4,11 @@ Tags: lottery, lotto, results, powerball, euromillions
 Requires at least: 6.5
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.1.0
+Stable tag: 0.2.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-The latest lottery results and the next draw date for 50+ lotteries, as blocks, a shortcode or a widget. Free; no account needed.
+Latest lottery results and next draw dates for 50+ lotteries: blocks, shortcodes, a widget. A Lotalytics API key adds an archive and draw pages.
 
 == Description ==
 
@@ -22,13 +22,23 @@ Show the winning numbers of Powerball, Mega Millions, EuroMillions, Eurojackpot,
 * **In your language**: English, Spanish, Portuguese, French, German and Italian. Dates follow your site's date format.
 * **No tracking**: nothing about your visitors is collected or sent.
 
+= With a Lotalytics API key =
+
+Add a key under **Settings → Lotalytics** (or define `LOTALYTICS_API_KEY` in wp-config.php). Paid plans add:
+
+* **A results archive**: the "Lottery results archive" block and `[lotalytics_archive game="powerball"]`, every past draw your plan covers, page by page.
+* **A results section on your site**: `/lottery/` (the address is a setting), `/lottery/powerball/` and a page per draw such as `/lottery/powerball/2026-10-14/`, inside your theme, with their own titles, descriptions and canonical links, and listed in your WordPress sitemap.
+* **Pre-fetching**: after each draw the plugin refreshes the results in the background, so visitors never wait.
+
+The settings page shows your plan, its games and your usage. Near the plan's request limit the plugin caches for longer, and Site Health tells you. The free results blocks never spend your key's requests.
+
 Results are facts only: winning numbers, bonus balls and draw dates. No predictions.
 
 = External service =
 
 This plugin is a front end for the **Lotalytics** results service (https://lotalytics.com). It requests data from `https://api.lotalytics.com` to display lottery results:
 
-* **What is sent, and when**: when a page with results is rendered and the cached copy has expired, your server requests `https://api.lotalytics.com/public/embed/<game>` with the number of draws, the page language and your site's home address; the editor's game list comes from `https://api.lotalytics.com/public/games`. The requests are made by your server, never by your visitors' browsers, and contain no information about your visitors.
+* **What is sent, and when**: when a page with results is rendered and the cached copy has expired, your server requests `https://api.lotalytics.com/public/embed/<game>` with the number of draws, the page language and your site's home address; the editor's game list comes from `https://api.lotalytics.com/public/games`. With an API key, the archive and draw pages come from `https://api.lotalytics.com/v1/…` with your key in the request header; the settings page reads `/v1/account`; "Register this site" sends your site's address to `/v1/account/sites`. The requests are made by your server, never by your visitors' browsers (your key never reaches a browser), and contain no information about your visitors.
 * **Terms of service**: https://lotalytics.com/terms
 * **Privacy policy**: https://lotalytics.com/privacy
 
@@ -50,7 +60,7 @@ Filters: `lotalytics_results_data` (the payload before rendering), `lotalytics_b
 
 = Is it free? =
 
-Yes. The plugin is free, and the results it shows come from Lotalytics' free service. Paid Lotalytics API plans (full history, statistics) will be supported in a later version.
+Yes. The plugin is free, and the latest-results blocks use Lotalytics' free service, no key needed. A paid Lotalytics API plan adds the archive and a results section with a page per draw.
 
 = How fast do results appear after a draw? =
 
@@ -71,6 +81,13 @@ The blocks follow your theme's colours and fonts. To restyle further, override t
 3. Settings → Lotalytics.
 
 == Changelog ==
+
+= 0.2.0 =
+* API keys: a key field with your plan, games and usage; "Register this site" for the free plan's credit link.
+* The "Lottery results archive" block and `[lotalytics_archive]`.
+* A results section on your site (`/lottery/…`) with a page per draw, in your sitemap.
+* Hourly pre-fetch after draws; longer caching near a plan's limit; Site Health checks the key.
+* Fixes: a failed request is no longer retried on every page view; "Clear cached results" also clears copies kept during an outage; "Disable the plugin stylesheet" now also covers the blocks.
 
 = 0.1.0 =
 * First release: "Lottery results" and "Next lottery draw" blocks, shortcodes, classic widget, opt-in credit link, six languages.

@@ -11,8 +11,11 @@ msgstr ""
 msgid "Lotalytics – Lottery Results"
 msgstr "Lotalytics – Risultati del lotto"
 
-msgid "Show the latest lottery results and the next draw date for 50+ lotteries, as blocks, a shortcode or a widget. Results come from the Lotalytics API."
-msgstr "Mostra gli ultimi risultati e la data della prossima estrazione di oltre 50 lotterie, come blocchi, shortcode o widget. I risultati provengono dall’API di Lotalytics."
+msgid "Show the latest lottery results and the next draw date for 50+ lotteries, as blocks, a shortcode or a widget. With a Lotalytics API key: a results archive and a page per draw on your site."
+msgstr "Mostra gli ultimi risultati e la data della prossima estrazione di oltre 50 lotterie, come blocchi, shortcode o widget. Con una chiave API Lotalytics: un archivio dei risultati e una pagina per estrazione sul tuo sito."
+
+msgid "Add an API key first."
+msgstr "Aggiungi prima una chiave API."
 
 msgid "The Lotalytics API answered HTTP %d."
 msgstr "L’API di Lotalytics ha risposto HTTP %d."
@@ -38,14 +41,50 @@ msgstr "Non è stato possibile caricare l’elenco dei giochi. Scrivi lo slug di
 msgid "Game slug"
 msgstr "Slug del gioco"
 
+msgid "Draws per page"
+msgstr "Estrazioni per pagina"
+
+msgid "The results archive needs a Lotalytics API key whose plan includes it (Settings → Lotalytics)."
+msgstr "L’archivio dei risultati richiede una chiave API di Lotalytics il cui piano lo includa (Impostazioni → Lotalytics)."
+
+msgid "Your Lotalytics plan doesn't include this game. Pick one of your plan's games in the block settings."
+msgstr "Il tuo piano Lotalytics non include questo gioco. Scegli uno dei giochi del tuo piano nelle impostazioni del blocco."
+
 msgid "%s results by Lotalytics"
 msgstr "Risultati %s da Lotalytics"
 
 msgid "Lottery results are unavailable right now. Check the game in the block settings, or try again in a few minutes."
 msgstr "I risultati non sono disponibili in questo momento. Controlla il gioco nelle impostazioni del blocco o riprova tra qualche minuto."
 
+msgid "Lottery results"
+msgstr "Risultati del lotto"
+
+msgid "%1$s numbers for %2$s"
+msgstr "Numeri %1$s del %2$s"
+
+msgid "%s results and winning numbers"
+msgstr "Risultati e numeri vincenti %s"
+
+msgid "Page %d"
+msgstr "Pagina %d"
+
+msgid "%1$s winning numbers for %2$s: %3$s."
+msgstr "Numeri vincenti %1$s del %2$s: %3$s."
+
+msgid "The latest %s results and winning numbers, draw by draw."
+msgstr "Gli ultimi risultati e numeri vincenti %s, estrazione per estrazione."
+
+msgid "Latest lottery results and winning numbers."
+msgstr "Ultimi risultati e numeri vincenti del lotto."
+
 msgid "Lotalytics Lottery Results"
 msgstr "Risultati del lotto Lotalytics"
+
+msgid "API key"
+msgstr "Chiave API"
+
+msgid "Results section"
+msgstr "Sezione dei risultati"
 
 msgid "Credit link"
 msgstr "Link di attribuzione"
@@ -55,6 +94,105 @@ msgstr "Gioco predefinito"
 
 msgid "Styling"
 msgstr "Stile"
+
+msgid "That doesn't look like a Lotalytics API key (they start with \"ltc_\"). The previous key was kept."
+msgstr "Non sembra una chiave API di Lotalytics (iniziano con \"ltc_\"). È stata mantenuta la chiave precedente."
+
+msgid "Set in wp-config.php (LOTALYTICS_API_KEY)."
+msgstr "Impostata in wp-config.php (LOTALYTICS_API_KEY)."
+
+msgid "Optional. Without a key the free results blocks work as they are. A key on a paid plan adds the results archive and a page per draw on your site. Leave blank to keep the current key; enter - to remove it."
+msgstr "Facoltativa. Senza chiave i blocchi gratuiti funzionano come ora. Una chiave di un piano a pagamento aggiunge l’archivio dei risultati e una pagina per estrazione al tuo sito. Lascia vuoto per mantenere la chiave attuale; scrivi - per rimuoverla."
+
+msgid "Get or manage a key on lotalytics.com"
+msgstr "Ottieni o gestisci una chiave su lotalytics.com"
+
+msgid "Lotalytics didn't accept this key. Check it on the Developer page, or remove it."
+msgstr "Lotalytics non ha accettato questa chiave. Controllala nella pagina Sviluppatori o rimuovila."
+
+msgid "yes"
+msgstr "sì"
+
+msgid "no"
+msgstr "no"
+
+msgid "Custom"
+msgstr "Personalizzato"
+
+msgid "Plan"
+msgstr "Piano"
+
+msgid "Results archive and draw pages"
+msgstr "Archivio dei risultati e pagine delle estrazioni"
+
+msgid "Statistics"
+msgstr "Statistiche"
+
+msgid "none chosen yet (choose them on the Developer page)"
+msgstr "nessuno scelto ancora (sceglili nella pagina Sviluppatori)"
+
+msgid "all"
+msgstr "tutti"
+
+msgid "Games"
+msgstr "Giochi"
+
+msgid "Requests this month"
+msgstr "Richieste questo mese"
+
+msgid "%1$s of %2$s"
+msgstr "%1$s su %2$s"
+
+msgid "Requests today"
+msgstr "Richieste oggi"
+
+msgid "This key is close to its request limit. The plugin is caching results for longer until the limit resets."
+msgstr "Questa chiave è vicina al limite di richieste. Il plugin tiene i risultati in cache più a lungo finché il limite non si azzera."
+
+msgid "Grace period: add the credit link soon."
+msgstr "Periodo di prova: aggiungi presto il link di attribuzione."
+
+msgid "Credit link found."
+msgstr "Link di attribuzione trovato."
+
+msgid "Credit link missing: the key will be limited soon."
+msgstr "Link di attribuzione mancante: la chiave sarà presto limitata."
+
+msgid "Credit link missing: the key is limited to a few requests a day."
+msgstr "Link di attribuzione mancante: la chiave è limitata a poche richieste al giorno."
+
+msgid "Free plan credit link"
+msgstr "Link di attribuzione del piano gratuito"
+
+msgid "This site (%1$s) is registered; last check: %2$s."
+msgstr "Questo sito (%1$s) è registrato; ultimo controllo: %2$s."
+
+msgid "pending"
+msgstr "in attesa"
+
+msgid "Turn on the credit link below so the check finds it."
+msgstr "Attiva qui sotto il link di attribuzione perché il controllo lo trovi."
+
+msgid "Register this site so Lotalytics can find the credit link here."
+msgstr "Registra questo sito perché Lotalytics trovi qui il link di attribuzione."
+
+msgid "Register this site"
+msgstr "Registra questo sito"
+
+msgid "Publish a results section on this site"
+msgstr "Pubblica una sezione dei risultati su questo sito"
+
+msgid "Address:"
+msgstr "Indirizzo:"
+
+msgid "Draws per page:"
+msgstr "Estrazioni per pagina:"
+
+msgid "View the results section"
+msgstr "Vedi la sezione dei risultati"
+
+msgid "Needs an API key whose plan includes the results archive and draw pages."
+msgstr "Serve una chiave API il cui piano includa l’archivio dei risultati e le pagine delle estrazioni."
 
 msgid "Show \"Results by Lotalytics\" under the results"
 msgstr "Mostra \"Risultati da Lotalytics\" sotto i risultati"
@@ -73,6 +211,9 @@ msgstr "Per i temi che stilizzano i risultati da soli. Il markup usa classi ltc-
 
 msgid "Cache cleared."
 msgstr "Cache svuotata."
+
+msgid "Site registered."
+msgstr "Sito registrato."
 
 msgid "Add the \"Lottery results\" or \"Next lottery draw\" block to any page, or use a shortcode:"
 msgstr "Aggiungi il blocco \"Risultati del lotto\" o \"Prossima estrazione\" a qualsiasi pagina, oppure usa uno shortcode:"
@@ -97,6 +238,27 @@ msgstr "Non hai il permesso di farlo."
 
 msgid "Lotalytics API"
 msgstr "API di Lotalytics"
+
+msgid "Lotalytics API key"
+msgstr "Chiave API di Lotalytics"
+
+msgid "The Lotalytics API key was not accepted"
+msgstr "La chiave API di Lotalytics non è stata accettata"
+
+msgid "Check the key under Settings → Lotalytics. Until it works, the archive and the draw pages are off; the free results blocks keep working."
+msgstr "Controlla la chiave in Impostazioni → Lotalytics. Finché non funziona, l’archivio e le pagine delle estrazioni sono disattivati; i blocchi gratuiti continuano a funzionare."
+
+msgid "The Lotalytics API key is close to its request limit"
+msgstr "La chiave API di Lotalytics è vicina al limite di richieste"
+
+msgid "Results are cached for longer until the limit resets. A bigger plan raises the limit."
+msgstr "I risultati restano in cache più a lungo finché il limite non si azzera. Un piano superiore alza il limite."
+
+msgid "The Lotalytics API key works"
+msgstr "La chiave API di Lotalytics funziona"
+
+msgid "Plan: %s."
+msgstr "Piano: %s."
 
 msgid "Lottery results can be loaded from Lotalytics"
 msgstr "I risultati del lotto possono essere caricati da Lotalytics"
@@ -128,8 +290,26 @@ msgstr "Risultati %s"
 msgid "Winning numbers"
 msgstr "Numeri vincenti"
 
+msgid "Results pages"
+msgstr "Pagine dei risultati"
+
+msgid "Newer draws"
+msgstr "Estrazioni più recenti"
+
+msgid "Page %1$d of %2$d"
+msgstr "Pagina %1$d di %2$d"
+
+msgid "Older draws"
+msgstr "Estrazioni precedenti"
+
 msgid "Next draw: %s"
 msgstr "Prossima estrazione: %s"
+
+msgid "Other draws"
+msgstr "Altre estrazioni"
+
+msgid "All %s results"
+msgstr "Tutti i risultati %s"
 
 msgid "Next %s draw"
 msgstr "Prossima estrazione %s"
@@ -177,3 +357,19 @@ msgstr "prossima estrazione"
 msgctxt "block keyword"
 msgid "jackpot"
 msgstr "jackpot"
+
+msgctxt "block title"
+msgid "Lottery results archive"
+msgstr "Archivio dei risultati del lotto"
+
+msgctxt "block description"
+msgid "A lottery's past draws, page by page. Needs a Lotalytics API key whose plan includes the archive."
+msgstr "Le estrazioni passate di una lotteria, pagina per pagina. Richiede una chiave API di Lotalytics il cui piano includa l’archivio."
+
+msgctxt "block keyword"
+msgid "archive"
+msgstr "archivio"
+
+msgctxt "block keyword"
+msgid "history"
+msgstr "storico"

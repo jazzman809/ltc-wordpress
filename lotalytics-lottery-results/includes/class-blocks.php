@@ -43,6 +43,10 @@ class Blocks {
 			LOTALYTICS_RESULTS_DIR . 'blocks/next-draw',
 			array( 'render_callback' => array( __CLASS__, 'render_next' ) )
 		);
+		register_block_type(
+			LOTALYTICS_RESULTS_DIR . 'blocks/results-archive',
+			array( 'render_callback' => array( __CLASS__, 'render_archive' ) )
+		);
 	}
 
 	/**
@@ -60,7 +64,9 @@ class Blocks {
 				'showTitle' => __( 'Show the title', 'lotalytics-lottery-results' ),
 				'noGames'   => __( 'The game list could not be loaded. Type a game slug, for example "powerball".', 'lotalytics-lottery-results' ),
 				'slug'      => __( 'Game slug', 'lotalytics-lottery-results' ),
+				'perPage'   => __( 'Draws per page', 'lotalytics-lottery-results' ),
 			),
+			'hasArchive'  => Api_Client::has_key() && Api_Client::features()['archive'],
 		);
 		wp_add_inline_script( self::EDITOR, 'window.lotalyticsEditor = ' . wp_json_encode( $data ) . ';', 'before' );
 	}
@@ -80,6 +86,20 @@ class Blocks {
 		);
 		$class = 'ltc-results' . ( $args['compact'] ? ' ltc-results--compact' : '' );
 		return Renderer::latest_results( $args, get_block_wrapper_attributes( array( 'class' => $class ) ) );
+	}
+
+	/**
+	 * Render "Lottery results archive".
+	 *
+	 * @param array $attrs Block attributes.
+	 * @return string HTML.
+	 */
+	public static function render_archive( $attrs ) {
+		$args = array(
+			'game'     => ! empty( $attrs['game'] ) ? $attrs['game'] : Settings::default_game(),
+			'per_page' => isset( $attrs['perPage'] ) ? $attrs['perPage'] : Settings::per_page(),
+		);
+		return Renderer::archive_block( $args, get_block_wrapper_attributes( array( 'class' => 'ltc-results ltc-archive' ) ) );
 	}
 
 	/**
